@@ -1,0 +1,51 @@
+﻿doctype html
+html(lang="ru")
+  head
+    title= mode === 'edit' ? 'Редактировать питомца' : 'Добавить нового питомца'
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.app-container
+      h1.page-title= mode === 'edit' ? 'Редактировать питомца' : 'Добавить нового питомца'
+      form.form-container(action=mode === 'edit' ? `/edit-pet/${pet.id}` : '/add-pet' method='POST' enctype='multipart/form-data')
+        .input-group
+          label(for="name") Имя:
+          input#name.form-input(type="text" name="name" required value=mode === 'edit' ? pet.name : '')
+        .input-group
+          label(for="species") Вид:
+          select#species.form-input(name="species" required)
+            option(value="обезьяна" selected=(mode === 'edit' && pet.species === 'обезьяна')) Обезьяна
+            option(value="крыса" selected=(mode === 'edit' && pet.species === 'крыса')) Крыса
+            option(value="попугай" selected=(mode === 'edit' && pet.species === 'попугай')) Попугай
+            option(value="кошка" selected=(mode === 'edit' && pet.species === 'кошка')) Кошка
+            option(value="собака" selected=(mode === 'edit' && pet.species === 'собака')) Собака
+            option(value="рыбки" selected=(mode === 'edit' && pet.species === 'рыбки')) Рыбки
+            option(value="черепаха" selected=(mode === 'edit' && pet.species === 'черепаха')) Черепаха
+            option(value="кролик" selected=(mode === 'edit' && pet.species === 'кролик')) Кролик
+            option(value="еж" selected=(mode === 'edit' && pet.species === 'еж')) Еж
+            option(value="хомяк" selected=(mode === 'edit' && pet.species === 'хомяк')) Хомяк
+        .input-group
+          label(for="age") Возраст:
+          input#age.form-input(type="number" name="age" min="0" required value=mode === 'edit' ? pet.age : '')
+        .input-group
+          label(for="gender") Пол:
+          select#gender.form-input(name="gender" required)
+            option(value="мужской" selected=(mode === 'edit' && pet.gender === 'мужской')) Мужской
+            option(value="женский" selected=(mode === 'edit' && pet.gender === 'женский')) Женский
+        .input-group
+          label(for="description") Описание:
+          textarea#description.form-input(name="description" rows="4")= mode === 'edit' ? pet.description : ''
+        .input-group
+          label(for="price") Цена:
+          input#price.form-input(type="number" name="price" step="0.01" required value=mode === 'edit' ? pet.price : '')
+        .input-group
+          label(for="available") Доступен:
+          input#available.form-checkbox(type="checkbox" name="available" checked=(mode === 'edit' && pet.available))
+        .input-group
+          label(for="image") Выберите изображение:
+          input#image.form-input(type="file" name="image" accept="image/*")
+        .action-buttons
+          button.btn-primary(type="submit")= mode === 'edit' ? 'Сохранить изменения' : 'Добавить питомца'
+          a.btn-secondary(href="/list-pets") Вернуться к списку

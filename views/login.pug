@@ -1,0 +1,109 @@
+﻿extends layout
+
+block content
+  style.
+    /* Общие настройки */
+    html {
+      font-size: 14px;
+      position: relative;
+      min-height: 100%;
+    }
+    @media (min-width: 768px) {
+      html {
+        font-size: 16px;
+      }
+    }
+    body {
+      margin-bottom: 60px;
+      font-family: 'Roboto Mono', monospace;
+      background: linear-gradient(135deg, #800020, #400020);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #ffffff;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .btn-primary {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffc107, #e0a800);
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #e0a800, #b38800);
+    }
+  h1.page-title Вход
+
+  // Сообщение об ошибке
+  if message
+    p(class="error")= message
+
+  // Форма входа
+  form.form-container(action="/auth/login" method="POST")
+    .form-group
+      label.form-label(for="email") Email:
+      input#email.form-input(type="email" name="email" required)
+    .form-group
+      label.form-label(for="password") Пароль:
+      input#password.form-input(type="password" name="password" required)
+    button.btn-primary(type="submit") Войти

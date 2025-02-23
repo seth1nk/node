@@ -1,0 +1,45 @@
+﻿doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Таблицы
+    style.
+      /* Стили для кнопок */
+      .header-container {
+        display: flex;
+        justify-content: center; /* Центрирование кнопок по горизонтали */
+        gap: 0px; /* Расстояние между кнопками */
+        margin-top: 20px;
+      }
+
+      .header-container a {
+        display: inline-block;
+        padding: 30px 60px; /* Увеличение размера кнопок */
+        font-size: 24px; /* Размер шрифта */
+        text-decoration: none; /* Убираем подчеркивание ссылок */
+        border-radius: 5px; /* Закругленные углы */
+        transition: background-color 0.3s ease; /* Плавный переход при наведении */
+      }
+            /* Стили для логотипа */
+      .logo {
+        display: block;
+        margin: 20px auto; /* Центрируем логотип */
+        max-width: 300px; /* Максимальная ширина логотипа */
+        height: auto; /* Сохраняем пропорции */
+      }
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    img.logo(src='/images/logo.png' alt='Логотип')
+    if username
+      h1 Добро пожаловать, #{username}!
+      a.pets-link(href="/auth/logout") Выйти
+    else
+      h1 Добро пожаловать на сайт!
+      p Чтобы войти, нажмите на кнопку ниже:
+      a.pets-link(href="/auth/login") Войти
+    div.header-container
+      a.pets-link(href="/list-pets") Питомцы
+      a.nutrition-link(href="/list-pitanie") Питание
+    block content

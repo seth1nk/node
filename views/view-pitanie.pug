@@ -1,0 +1,69 @@
+﻿doctype html
+html(lang="en")
+  head
+    title Просмотр продукта
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    style
+      | .btn-secondary {
+      |   background: rgba(255, 255, 255, 0.1);
+      |   color: white;
+      |   border: none;
+      |   padding: 10px 20px;
+      |   border-radius: 8px;
+      |   font-size: 1rem;
+      |   font-weight: bold;
+      |   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      |   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      |   cursor: pointer;
+      | }
+      | .btn-secondary:hover {
+      |   background: rgba(255, 255, 255, 0.2);
+      |   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      | }
+      | .btn-primary {
+      |   background: linear-gradient(135deg, #ffc107, #e0a800); /* Желтый градиент */
+      |   color: white;
+      |   border: none;
+      |   padding: 10px 20px;
+      |   border-radius: 8px;
+      |   font-size: 1rem;
+      |   font-weight: bold;
+      |   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      |   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      |   cursor: pointer;
+      | }
+      | .btn-primary:hover {
+      |   transform: translateY(-3px);
+      |   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      |   background: linear-gradient(135deg, #e0a800, #b38800); /* Более темный градиент при наведении */
+      | }
+      | .action-buttons {
+      |   display: flex;
+      |   gap: 10px;
+      |   justify-content: center;
+      |   margin-top: 20px;
+      | }
+  body
+    div.app-container
+      h1.page-title Просмотр продукта
+      div.container
+        div.product-info
+          if product.img
+            img.product-image(src=product.img alt="Product Image")
+          else
+            | Нет изображения
+          div.info-container
+            p <strong>Название:</strong> #{product.name}
+            p <strong>Вид:</strong> #{product.vid}
+            p <strong>Бренд:</strong> #{product.brand}
+            p <strong>Вес:</strong> #{product.weight} кг
+            p <strong>Описание:</strong> #{product.description || 'N/A'}
+            p <strong>Цена:</strong> #{product.price} ₽
+            p <strong>В наличии:</strong>
+              span.status(class=product.in_stock ? 'available' : 'unavailable')
+                | #{product.in_stock ? 'Да' : 'Нет'}
+        div.action-buttons
+          a.btn-secondary(href="/list-pitanie") Вернуться к списку
+          a.btn-primary(href=`/edit-pitanie/${product.id}`) Редактировать

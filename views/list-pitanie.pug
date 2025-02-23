@@ -1,0 +1,100 @@
+﻿doctype html
+html(lang="ru")
+  head
+    title Список питания
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    style.
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+      .pagination a {
+        background: white;
+        color: crimson;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .pagination a.active {
+        background: crimson;
+        color: white;
+      }
+      .pagination a:hover:not(.active) {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .pagination .dots {
+        color: #aaa;
+        pointer-events: none;
+      }
+  body
+    div.app-container
+      div.header-container
+        a.pets-link(href="/list-pets") Питомцы
+        a.pets-link(href="/") Главная
+        a.nutrition-link(href="/list-pitanie") Питание
+      h1.page-title Список продуктов питания
+      div(style="text-align: center; margin-bottom: 20px;")
+        a.btn-primary(href="/add-pitanie") Добавить продукт
+      div.table-container
+        table.styled-table
+          thead
+            tr
+              th ID
+              th Название
+              th Вид
+              th Бренд
+              th Вес (г)
+              th Цена (₽)
+              th В наличии
+              th Изображение
+              th Действия
+          tbody
+            each product, index in products
+              tr
+                td= index + 1 + (currentPage - 1) * 10
+                td= product.name
+                td= product.vid
+                td= product.brand
+                td= product.weight + ' г'
+                td= product.price + ' ₽'
+                td
+                  span.status(class=product.in_stock ? 'available' : 'unavailable')
+                    | #{product.in_stock ? 'Да' : 'Нет'}
+                td
+                  if product.img
+                    img.product-image(src=product.img alt="Product Image")
+                  else
+                    | N/A
+                td
+                  div.action-buttons
+                    a.action-btn.view-icon(href=`/view-pitanie/${product.id}`)
+                      i.fas.fa-eye
+                    a.action-btn.edit-icon(href=`/edit-pitanie/${product.id}`)
+                      i.fas.fa-pencil-alt
+                    a.action-btn.delete-icon(href=`/delete-pitanie/${product.id}` onclick="return confirm('Вы уверены, что хотите удалить этот продукт?')")
+                      i.fas.fa-trash-alt
+      if totalPages > 1
+        div.pagination
+          if currentPage > 1
+            a(href=`/list-pitanie?page=${currentPage - 1}`) &laquo; Предыдущая
+          if currentPage > 3
+            a(href=`/list-pitanie?page=1`) Первая
+          each pageNumber in Array(totalPages).keys()
+            - const page = pageNumber + 1
+            if page <= 3 || page >= totalPages - 2 || (page >= currentPage - 2 && page <= currentPage + 2)
+              a(href=`/list-pitanie?page=${page}` class=(page === currentPage ? 'active' : ''))= page
+            else if (page === currentPage - 3 || page === currentPage + 3)
+              span.dots ...
+          if currentPage < totalPages - 2
+            a(href=`/list-pitanie?page=${totalPages}`) Последняя
+          if currentPage < totalPages
+            a(href=`/list-pitanie?page=${currentPage + 1}`) Следующая &raquo;

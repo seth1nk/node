@@ -1,0 +1,41 @@
+﻿doctype html
+html(lang="ru")
+  head
+    title Редактировать питомца
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.app-container
+      h1.page-title Редактировать питомца
+      form.form-container(action=`/edit-pet/${pet.id}` method="POST")
+        .input-group
+          label(for="name") Имя:
+          input#name.form-input(type="text" name="name" value=pet.name required)
+        .input-group
+          label(for="species") Вид:
+          input#species.form-input(type="text" name="species" value=pet.species maxlength="100" required)
+        .input-group
+          label(for="age") Возраст:
+          input#age.form-input(type="number" name="age" value=pet.age min="0" required)
+        .input-group
+          label(for="gender") Пол:
+          select#gender.form-input(name="gender" required)
+            option(value="male" selected=pet.gender === 'male') Мужской
+            option(value="female" selected=pet.gender === 'female') Женский
+        .input-group
+          label(for="description") Описание:
+          textarea#description.form-input(name="description" rows="4")= pet.description || ''
+        .input-group
+          label(for="price") Цена (₽):
+          input#price.form-input(type="number" name="price" value=pet.price step="0.01" required)
+        .input-group
+          label(for="available") Доступен:
+          input#available.form-checkbox(type="checkbox" name="available" checked=pet.available)
+        .input-group
+          label(for="image") Изображение:
+          input#image.form-input(type="file" name="image" accept="image/*")
+        .action-buttons
+          button.btn-primary(type="submit") Сохранить изменения
+          a.btn-secondary(href="/list-pets") Вернуться к списку

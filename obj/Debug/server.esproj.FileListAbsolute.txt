@@ -1,0 +1,4 @@
+C:\project\vue\server\server\obj\Debug\server.esproj.CoreCompileInputs.cache
+C:\project\vueapp\server\server\obj\Debug\server.esproj.CoreCompileInputs.cache
+C:\project\vueapp\vueapp\server\server\obj\Debug\server.esproj.CoreCompileInputs.cache
+C:\project\vueproject1\vueproject1\server\server\obj\Debug\server.esproj.CoreCompileInputs.cache

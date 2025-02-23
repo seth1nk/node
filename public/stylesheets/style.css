@@ -1,0 +1,387 @@
+/* Общие настройки */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Roboto Mono', monospace;
+    background: linear-gradient(135deg, #800020, #400020);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Контейнер приложения */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовок страницы */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Форма */
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-select:focus {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+    .form-checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: #c70039;
+        cursor: pointer;
+    }
+
+/* Кнопки */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #e0a800, #b38800);
+    }
+
+.btn-secondary {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    text-decoration: none;
+}
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+/* Таблица */
+.table-container {
+    width: 100%;
+    max-width: 1400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px; /* Добавляем отступ снизу */
+}
+
+.styled-table {
+    width: 100%;
+    min-width: 1200px; /* Минимальная ширина таблицы */
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+    .styled-table th {
+        background: linear-gradient(135deg, #c70039, #800040);
+        color: #ffffff;
+        font-weight: bold;
+        padding: 15px;
+        text-align: center;
+        border-bottom: none;
+        border-right: none;
+    }
+
+    .styled-table td {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+        .styled-table th:last-child,
+        .styled-table td:last-child {
+            border-right: none;
+        }
+
+    .styled-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+    }
+
+.pet-image {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+}
+
+.no-pets-message {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+    .status.available {
+        background: #32a852;
+    }
+
+    .status.unavailable {
+        background: #c70039;
+    }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    .action-btn:hover {
+        transform: scale(1.2);
+    }
+
+.view-icon {
+    color: #17a2b8;
+}
+
+.edit-icon {
+    color: #ffc107;
+}
+
+.delete-icon {
+    color: #dc3545;
+}
+
+/* Шапка */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pets-link,
+.nutrition-link {
+    background: white;
+    color: crimson;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .pets-link:hover,
+    .nutrition-link:hover {
+        background: #f8f9fa;
+        transform: scale(1.05);
+    }
+
+/* Просмотр питомца */
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
+.pet-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.pet-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+}
+
+.info-container {
+    flex: 1;
+    margin-left: 20px;
+}
+option {
+    display: block; /* Обеспечивает видимость текста */
+    visibility: visible;
+}
+
+select.form-input {
+    background-color: #333; /* Темный фон для select */
+    color: #fff; /* Белый текст для select */
+}
+.product-image {
+     max-width: 120px; /* Ограничиваем максимальную ширину */
+     max-height: 120px; /* Ограничиваем максимальную высоту */
+     border-radius: 8px; /* Добавляем закругленные углы */
+     object-fit: cover; /* Сохраняем пропорции изображения */
+    
+}
+.styled-table img {
+     vertical-align: middle; /* Выравниваем изображение по центру ячейки */
+    
+}
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+    .pagination a {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        .pagination a.active {
+            background: crimson;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }

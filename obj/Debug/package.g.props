@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">server</PackageJsonName>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">0.0.0</PackageJsonVersion>
+    <PackageJsonPrivate Condition="$(PackageJsonPrivate) == ''">true</PackageJsonPrivate>
+    <PackageJsonScriptsStart Condition="$(PackageJsonScriptsStart) == ''">node ./bin/www</PackageJsonScriptsStart>
+    <PackageJsonDependenciesFakerJsFaker Condition="$(PackageJsonDependenciesFakerJsFaker) == ''">^9.5.0</PackageJsonDependenciesFakerJsFaker>
+    <PackageJsonDependenciesBcrypt Condition="$(PackageJsonDependenciesBcrypt) == ''">^5.1.1</PackageJsonDependenciesBcrypt>
+    <PackageJsonDependenciesBcryptjs Condition="$(PackageJsonDependenciesBcryptjs) == ''">^3.0.2</PackageJsonDependenciesBcryptjs>
+    <PackageJsonDependenciesBodyParser Condition="$(PackageJsonDependenciesBodyParser) == ''">^1.20.3</PackageJsonDependenciesBodyParser>
+    <PackageJsonDependenciesCookieParser Condition="$(PackageJsonDependenciesCookieParser) == ''">~1.4.4</PackageJsonDependenciesCookieParser>
+    <PackageJsonDependenciesCors Condition="$(PackageJsonDependenciesCors) == ''">^2.8.5</PackageJsonDependenciesCors>
+    <PackageJsonDependenciesDebug Condition="$(PackageJsonDependenciesDebug) == ''">~2.6.9</PackageJsonDependenciesDebug>
+    <PackageJsonDependenciesExpress Condition="$(PackageJsonDependenciesExpress) == ''">^4.21.2</PackageJsonDependenciesExpress>
+    <PackageJsonDependenciesExpressSession Condition="$(PackageJsonDependenciesExpressSession) == ''">^1.18.1</PackageJsonDependenciesExpressSession>
+    <PackageJsonDependenciesFaker Condition="$(PackageJsonDependenciesFaker) == ''">^5.5.3</PackageJsonDependenciesFaker>
+    <PackageJsonDependenciesHttpErrors Condition="$(PackageJsonDependenciesHttpErrors) == ''">~1.6.3</PackageJsonDependenciesHttpErrors>
+    <PackageJsonDependenciesJsonwebtoken Condition="$(PackageJsonDependenciesJsonwebtoken) == ''">^9.0.2</PackageJsonDependenciesJsonwebtoken>
+    <PackageJsonDependenciesMongoose Condition="$(PackageJsonDependenciesMongoose) == ''">^8.10.1</PackageJsonDependenciesMongoose>
+    <PackageJsonDependenciesMorgan Condition="$(PackageJsonDependenciesMorgan) == ''">~1.9.1</PackageJsonDependenciesMorgan>
+    <PackageJsonDependenciesMulter Condition="$(PackageJsonDependenciesMulter) == ''">^1.4.5-lts.1</PackageJsonDependenciesMulter>
+    <PackageJsonDependenciesPg Condition="$(PackageJsonDependenciesPg) == ''">^8.13.3</PackageJsonDependenciesPg>
+    <PackageJsonDependenciesPgHstore Condition="$(PackageJsonDependenciesPgHstore) == ''">^2.3.4</PackageJsonDependenciesPgHstore>
+    <PackageJsonDependenciesPug Condition="$(PackageJsonDependenciesPug) == ''">^3.0.3</PackageJsonDependenciesPug>
+    <PackageJsonDependenciesSequelize Condition="$(PackageJsonDependenciesSequelize) == ''">^6.37.5</PackageJsonDependenciesSequelize>
+    <PackageJsonDevdependenciesEslint Condition="$(PackageJsonDevdependenciesEslint) == ''">^9.20.1</PackageJsonDevdependenciesEslint>
+  </PropertyGroup>
+</Project>
