@@ -39,11 +39,6 @@ router.post('/register', async (req, res) => {
 });
 
 // Маршрут для отображения страницы входа
-router.get('/login', (req, res) => {
-  res.render('login', { error: null });
-});
-
-// Маршрут для входа
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -70,8 +65,24 @@ router.post('/login', async (req, res) => {
     // Сохраняем токен в cookie
     res.cookie('token', token, { httpOnly: true, maxAge: 1 * 60 * 60 * 1000 }); // Токен действителен 1 час
 
-    // Возвращаем успешный ответ
-    res.json({ message: 'Вход выполнен успешно', token });
+    // Отправляем HTML-страницу с мета-редиректом через 3 секунды
+    const htmlResponse = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="3; url=/">
+        <title>Вход выполнен успешно</title>
+      </head>
+      <body>
+        <h1>Вход выполнен успешно!</h1>
+        <p>Вы будете перенаправлены на главную страницу через 3 секунды...</p>
+      </body>
+      </html>
+    `;
+
+    res.send(htmlResponse);
+
   } catch (err) {
     console.error('Ошибка при входе:', err);
     res.status(500).json({ message: 'Ошибка сервера', error: err.message });
