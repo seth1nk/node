@@ -123,4 +123,19 @@ router.get('/view-pet/:id', async (req, res) => {
         res.status(500).json({ message: 'Ошибка сервера', error: err.message });
     }
 });
+router.get('/view-pitanie/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Pitanie.findByPk(productId); // Ищем продукт по ID
+
+    if (!product) {
+      return res.status(404).json({ message: 'Продукт не найден' });
+    }
+
+    res.json(product); // Возвращаем данные продукта
+  } catch (err) {
+    console.error('Ошибка при получении данных продукта:', err);
+    res.status(500).json({ message: 'Ошибка сервера', error: err.message });
+  }
+});
 module.exports = router;
