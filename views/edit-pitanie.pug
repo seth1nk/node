@@ -14,8 +14,18 @@ html(lang="ru")
           label(for="name") Название:
           input#name.form-input(type="text" name="name" value=product.name required)
         .input-group
-          label(for="vid") Вид:
-          input#vid.form-input(type="text" name="vid" value=product.vid maxlength="100" required)
+            label(for="vid") Вид:
+            select#vid.form-input(name="vid" required)
+              option(value="обезьяна") Обезьяна
+              option(value="крыса") Крыса
+              option(value="попугай") Попугай
+              option(value="кошка") Кошка
+              option(value="собака") Собака
+              option(value="рыбки") Рыбки
+              option(value="черепаха") Черепаха
+              option(value="кролик") Кролик
+              option(value="еж") Еж
+              option(value="хомяк") Хомяк
         .input-group
           label(for="brand") Бренд:
           input#brand.form-input(type="text" name="brand" value=product.brand maxlength="100" required)
