@@ -293,14 +293,6 @@ app.post('/edit-pet/:id', upload.single('image'), async (req, res) => {
     const existingPet = await Pet.findByPk(petId);
     if (!existingPet) return res.status(404).send('Pet not found');
 
-    // Если новый файл был загружен, удалить старый файл
-    if (req.file && existingPet.img) {
-      const oldImagePath = path.join(__dirname, 'public', existingPet.img);
-      if (fs.existsSync(oldImagePath)) {
-        fs.unlinkSync(oldImagePath); // Удаляем старый файл
-      }
-    }
-
     const updatedData = {
       name,
       species,
@@ -309,6 +301,7 @@ app.post('/edit-pet/:id', upload.single('image'), async (req, res) => {
       description,
       price: parseFloat(price),
       available: available === 'on',
+      // Если загружено новое изображение, обновляем путь, иначе оставляем старое
       img: req.file ? `/images/pets/${req.file.filename}` : existingPet.img,
     };
 
@@ -320,21 +313,13 @@ app.post('/edit-pet/:id', upload.single('image'), async (req, res) => {
 });
 
 // Маршрут для обновления продукта питания (POST)
-app.post('/edit-pitanie/:id', upload.single('image'), async (req, res) => {
+app.post('/edit-pitanie/:id', uploadPitanie.single('image'), async (req, res) => {
   const productId = req.params.id;
   const { name, vid, brand, weight, description, price, in_stock } = req.body;
 
   try {
     const existingProduct = await Pitanie.findByPk(productId);
     if (!existingProduct) return res.status(404).send('Product not found');
-
-    // Если новый файл был загружен, удалить старый файл
-    if (req.file && existingProduct.img) {
-      const oldImagePath = path.join(__dirname, 'public', existingProduct.img);
-      if (fs.existsSync(oldImagePath)) {
-        fs.unlinkSync(oldImagePath); // Удаляем старый файл
-      }
-    }
 
     const updatedData = {
       name,
@@ -344,7 +329,8 @@ app.post('/edit-pitanie/:id', upload.single('image'), async (req, res) => {
       description,
       price: parseFloat(price),
       in_stock: in_stock === 'on',
-      img: req.file ? `/images/${req.file.filename}` : existingProduct.img,
+      // Если загружено новое изображение, обновляем путь, иначе оставляем старое
+      img: req.file ? `/images/pitanie/${req.file.filename}` : existingProduct.img,
     };
 
     await Pitanie.update(updatedData, { where: { id: productId } });
