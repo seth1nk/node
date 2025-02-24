@@ -76,6 +76,32 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+const storagePitanie = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const dir = path.join(__dirname, 'public', 'images', 'pitanie');
+    // Проверяем, существует ли директория, и если нет, создаем её
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
+  },
+  filename: function (req, file, cb) {
+    // Сохраняем оригинальное имя файла
+    const originalName = file.originalname;
+    const filePath = path.join(__dirname, 'public', 'images', 'pitanie', originalName);
+
+    // Проверяем, существует ли файл с таким именем
+    if (fs.existsSync(filePath)) {
+      // Если файл уже существует, просто передаем оригинальное имя
+      cb(null, originalName);
+    } else {
+      // Если файла нет, сохраняем его с оригинальным именем
+      cb(null, originalName);
+    }
+  },
+});
+
+const uploadPitanie = multer({ storage: storagePitanie });
 // Роуты
 app.use('/auth', authRouter);
 app.set('view engine', 'pug');
@@ -163,7 +189,7 @@ app.get('/add-pitanie', (req, res) => {
   res.render('add-pitanie', { title: 'Добавить продукт питания' });
 });
 // Добавление нового продукта питания
-app.post('/add-pitanie', upload.single('image'), async (req, res) => {
+app.post('/add-pitanie', uploadPitanie.single('image'), async (req, res) => {
   try {
     const { name, vid, brand, weight, description, price, in_stock } = req.body;
 
@@ -179,7 +205,7 @@ app.post('/add-pitanie', upload.single('image'), async (req, res) => {
       description,
       price: parseFloat(price),
       in_stock: in_stock === 'on',
-      img: req.file ? `${req.file.filename}` : null,
+      img: req.file ? `/images/pitanie/${req.file.filename}` : null, // Путь к изображению
     });
 
     res.redirect('/list-pitanie');
