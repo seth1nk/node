@@ -108,5 +108,19 @@ router.delete('/pitanie/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting product', error: err.message });
   }
 });
+router.get('/view-pet/:id', async (req, res) => {
+    try {
+        const petId = req.params.id;
+        const pet = await Pet.findByPk(petId); // Ищем питомца по ID
 
+        if (!pet) {
+            return res.status(404).json({ message: 'Питомец не найден' });
+        }
+
+        res.json(pet); // Возвращаем данные питомца
+    } catch (err) {
+        console.error('Ошибка при получении данных питомца:', err);
+        res.status(500).json({ message: 'Ошибка сервера', error: err.message });
+    }
+});
 module.exports = router;
