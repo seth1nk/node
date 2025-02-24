@@ -156,6 +156,22 @@ app.get('/api/pitanies', async (req, res) => {
     res.status(500).json({ message: 'Error fetching pitanies', error: err.message });
   }
 });
+app.get('/api/view-pet/:id', async (req, res) => {
+    const petId = req.params.id;
+    if (isNaN(petId)) {
+        return res.status(400).json({ message: 'Invalid ID format' });
+    }
+    try {
+        const pet = await Pet.findByPk(petId);
+        if (!pet) {
+            return res.status(404).json({ message: 'Pet not found' });
+        }
+        res.json(pet); // Возвращаем данные питомца
+    } catch (err) {
+        console.error('Ошибка при получении данных питомца:', err);
+        res.status(500).json({ message: 'Error fetching pet', error: err.message });
+    }
+});
 app.get('/add-pet', (req, res) => {
   res.render('add-pet', { title: 'Добавить питомца' });
 });
