@@ -115,7 +115,9 @@ app.get('/api/pitanies', async (req, res) => {
     res.status(500).json({ message: 'Error fetching pitanies', error: err.message });
   }
 });
-
+app.get('/add-pet', (req, res) => {
+  res.render('add-pet', { title: 'Добавить питомца' });
+});
 // Добавление нового питомца
 app.post('/add-pet', upload.single('image'), async (req, res) => {
   try {
@@ -142,7 +144,9 @@ app.post('/add-pet', upload.single('image'), async (req, res) => {
     res.status(500).json({ message: 'Error creating pet', error: err.message });
   }
 });
-
+app.get('/add-pitanie', (req, res) => {
+  res.render('add-pitanie', { title: 'Добавить продукт питания' });
+});
 // Добавление нового продукта питания
 app.post('/add-pitanie', upload.single('image'), async (req, res) => {
   try {
