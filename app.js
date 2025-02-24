@@ -40,6 +40,7 @@ app.use(logger('dev'));
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
   origin: 'https://glowing-biscochitos-d161ed.netlify.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -67,6 +68,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('images', express.static(path.join(__dirname, 'public/images')));
 
 // Главная страница
 app.get('/', async (req, res) => {
@@ -89,7 +92,7 @@ app.get('/api/pets', async (req, res) => {
     const pets = await Pet.findAll();
     const formattedPets = pets.map(pet => ({
       ...pet.dataValues,
-      img: pet.img ? `/images${pet.img}` : null,
+      img: pet.img ? `${pet.img}` : null,
     }));
     res.json(formattedPets);
   } catch (err) {
@@ -104,7 +107,7 @@ app.get('/api/pitanies', async (req, res) => {
     const pitanies = await Pitanie.findAll();
     const formattedPitanies = pitanies.map(pitanie => ({
       ...pitanie.dataValues,
-      img: pitanie.img ? `/images${pitanie.img}` : null,
+      img: pitanie.img ? `${pitanie.img}` : null,
     }));
     res.json(formattedPitanies);
   } catch (err) {
@@ -130,7 +133,7 @@ app.post('/add-pet', upload.single('image'), async (req, res) => {
       description,
       price: parseFloat(price),
       available: available === 'on',
-      img: req.file ? `/images/${req.file.filename}` : null,
+      img: req.file ? `${req.file.filename}` : null,
     });
 
     res.redirect('/list-pets');
@@ -157,7 +160,7 @@ app.post('/add-pitanie', upload.single('image'), async (req, res) => {
       description,
       price: parseFloat(price),
       in_stock: in_stock === 'on',
-      img: req.file ? `/images/${req.file.filename}` : null,
+      img: req.file ? `${req.file.filename}` : null,
     });
 
     res.redirect('/list-pitanie');
