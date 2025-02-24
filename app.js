@@ -92,7 +92,7 @@ app.get('/api/pets', async (req, res) => {
     const pets = await Pet.findAll();
     const formattedPets = pets.map(pet => ({
       ...pet.dataValues,
-      img: pet.img ? `/img/pets/${pet.img}` : null, // Путь к изображению относительно dist
+      img: pet.img ? `${pet.img}` : null, // Путь к изображению относительно dist
     }));
     res.json(formattedPets);
   } catch (err) {
