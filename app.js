@@ -51,11 +51,26 @@ app.use(cors({
 // Настройка multer для загрузки файлов
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images');
+    const dir = path.join(__dirname, 'public', 'images', 'pets');
+    // Проверяем, существует ли директория, и если нет, создаем её
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    // Сохраняем оригинальное имя файла
+    const originalName = file.originalname;
+    const filePath = path.join(__dirname, 'public', 'images', 'pets', originalName);
+
+    // Проверяем, существует ли файл с таким именем
+    if (fs.existsSync(filePath)) {
+      // Если файл уже существует, просто передаем оригинальное имя
+      cb(null, originalName);
+    } else {
+      // Если файла нет, сохраняем его с оригинальным именем
+      cb(null, originalName);
+    }
   },
 });
 
@@ -120,29 +135,29 @@ app.get('/add-pet', (req, res) => {
 });
 // Добавление нового питомца
 app.post('/add-pet', upload.single('image'), async (req, res) => {
-  try {
-    const { name, species, age, gender, description, price, available } = req.body;
+    try {
+        const { name, species, age, gender, description, price, available } = req.body;
 
-    if (!name || !species || age == null || !gender || price == null) {
-      return res.status(400).json({ message: 'All required fields are not provided' });
+        if (!name || !species || age == null || !gender || price == null) {
+            return res.status(400).json({ message: 'All required fields are not provided' });
+        }
+
+        const pet = await Pet.create({
+            name,
+            species,
+            age: parseInt(age, 10),
+            gender: gender.toLowerCase() === 'мужской' ? 'мужской' : 'женский',
+            description,
+            price: parseFloat(price),
+            available: available === 'on',
+            img: req.file ? `/images/pets/${req.file.filename}` : null, // Путь к изображению
+        });
+
+        res.redirect('/list-pets');
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Error creating pet', error: err.message });
     }
-
-    const pet = await Pet.create({
-      name,
-      species,
-      age: parseInt(age, 10),
-      gender: gender.toLowerCase() === 'мужской' ? 'мужской' : 'женский',
-      description,
-      price: parseFloat(price),
-      available: available === 'on',
-      img: req.file ? `${req.file.filename}` : null,
-    });
-
-    res.redirect('/list-pets');
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error creating pet', error: err.message });
-  }
 });
 app.get('/add-pitanie', (req, res) => {
   res.render('add-pitanie', { title: 'Добавить продукт питания' });
