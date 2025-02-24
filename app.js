@@ -107,7 +107,7 @@ app.get('/api/pitanies', async (req, res) => {
     const pitanies = await Pitanie.findAll();
     const formattedPitanies = pitanies.map(pitanie => ({
       ...pitanie.dataValues,
-      img: pitanie.img ? `/public/images${pitanie.img}` : null,
+      img: pitanie.img ? `${pitanie.img}` : null,
     }));
     res.json(formattedPitanies);
   } catch (err) {
