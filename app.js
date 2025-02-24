@@ -40,7 +40,7 @@ app.use(logger('dev'));
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use(cors({
   origin: 'https://glowing-biscochitos-d161ed.netlify.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -92,7 +92,7 @@ app.get('/api/pets', async (req, res) => {
     const pets = await Pet.findAll();
     const formattedPets = pets.map(pet => ({
       ...pet.dataValues,
-      img: pet.img ? `/public${pet.img}` : null,
+      img: pet.img ? `/images${pet.img}` : null,
     }));
     res.json(formattedPets);
   } catch (err) {
@@ -107,7 +107,7 @@ app.get('/api/pitanies', async (req, res) => {
     const pitanies = await Pitanie.findAll();
     const formattedPitanies = pitanies.map(pitanie => ({
       ...pitanie.dataValues,
-      img: pitanie.img ? `/public${pitanie.img}` : null,
+      img: pitanie.img ? `/images${pitanie.img}` : null,
     }));
     res.json(formattedPitanies);
   } catch (err) {
