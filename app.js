@@ -92,7 +92,7 @@ app.get('/api/pets', async (req, res) => {
     const pets = await Pet.findAll();
     const formattedPets = pets.map(pet => ({
       ...pet.dataValues,
-      img: pet.img ? `/dist${pet.img}` : null,
+      img: pet.img ? `/public${pet.img}` : null,
     }));
     res.json(formattedPets);
   } catch (err) {
@@ -107,7 +107,7 @@ app.get('/api/pitanies', async (req, res) => {
     const pitanies = await Pitanie.findAll();
     const formattedPitanies = pitanies.map(pitanie => ({
       ...pitanie.dataValues,
-      img: pitanie.img ? `/dist${pitanie.img}` : null,
+      img: pitanie.img ? `/public${pitanie.img}` : null,
     }));
     res.json(formattedPitanies);
   } catch (err) {
