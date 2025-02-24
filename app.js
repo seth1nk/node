@@ -157,7 +157,7 @@ app.get('/api/pitanies', async (req, res) => {
   }
 });
 app.get('/api/view-pet/:id', async (req, res) => {
-    const petId = req.params.id;
+    const petId = parseInt(req.params.id, 10); // Преобразуем ID в число
     if (isNaN(petId)) {
         return res.status(400).json({ message: 'Invalid ID format' });
     }
