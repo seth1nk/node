@@ -41,7 +41,12 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+app.use(cors({
+  origin: 'https://glowing-biscochitos-d161ed.netlify.app', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 
 // Настройка multer для загрузки файлов
 const storage = multer.diskStorage({
