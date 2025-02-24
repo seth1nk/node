@@ -111,30 +111,20 @@ router.delete('/pitanie/:id', async (req, res) => {
 router.get('/view-pet/:id', async (req, res) => {
   try {
     const petId = req.params.id;
-    const pet = await Pet.findByPk(petId); // Ищем питомца по ID
+    console.log('Запрошен питомец с ID:', petId); // Логируем ID
+
+    // Ищем питомца по ID
+    const pet = await Pet.findByPk(petId);
 
     if (!pet) {
+      console.log('Питомец не найден'); // Логируем, если питомец не найден
       return res.status(404).json({ message: 'Питомец не найден' });
     }
 
+    console.log('Найден питомец:', pet); // Логируем найденного питомца
     res.json(pet); // Возвращаем данные питомца
   } catch (err) {
-    console.error('Ошибка при получении данных питомца:', err);
-    res.status(500).json({ message: 'Ошибка сервера', error: err.message });
-  }
-});
-router.get('/view-pitanie/:id', async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const product = await Pitanie.findByPk(productId); // Ищем продукт по ID
-
-    if (!product) {
-      return res.status(404).json({ message: 'Продукт не найден' });
-    }
-
-    res.json(product); // Возвращаем данные продукта
-  } catch (err) {
-    console.error('Ошибка при получении данных продукта:', err);
+    console.error('Ошибка при получении данных питомца:', err); // Логируем ошибку
     res.status(500).json({ message: 'Ошибка сервера', error: err.message });
   }
 });
