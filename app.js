@@ -275,18 +275,15 @@ app.post('/edit-pet/:id', upload.single('image'), async (req, res) => {
       }
     }
 
-    // Преобразуем поле "gender" в нижний регистр
-    const normalizedGender = gender.toLowerCase() === 'мужской' ? 'мужской' : 'женский';
-
     const updatedData = {
       name,
       species,
       age: parseInt(age, 10),
-      gender: normalizedGender,
+      gender: gender.toLowerCase() === 'мужской' ? 'мужской' : 'женский',
       description,
       price: parseFloat(price),
       available: available === 'on',
-      img: req.file ? `/images/${req.file.filename}` : existingPet.img,
+      img: req.file ? `/images/pets/${req.file.filename}` : existingPet.img,
     };
 
     await Pet.update(updatedData, { where: { id: petId } });
