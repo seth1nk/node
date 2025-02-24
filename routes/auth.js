@@ -38,6 +38,9 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.get('/login', (req, res) => {
+  res.render('login', { error: null });
+});
 // Маршрут для отображения страницы входа
 router.post('/login', async (req, res) => {
   try {
