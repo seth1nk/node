@@ -69,7 +69,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('dist', express.static(path.join(__dirname, 'public/dist')));
+app.use('images', express.static(path.join(__dirname, 'public/images')));
 
 // Главная страница
 app.get('/', async (req, res) => {
@@ -92,7 +92,7 @@ app.get('/api/pets', async (req, res) => {
     const pets = await Pet.findAll();
     const formattedPets = pets.map(pet => ({
       ...pet.dataValues,
-      img: pet.img ? `/images/${pet.img}` : null,
+      img: pet.img ? `/dist${pet.img}` : null,
     }));
     res.json(formattedPets);
   } catch (err) {
@@ -107,7 +107,7 @@ app.get('/api/pitanies', async (req, res) => {
     const pitanies = await Pitanie.findAll();
     const formattedPitanies = pitanies.map(pitanie => ({
       ...pitanie.dataValues,
-      img: pitanie.img ? `/images/${pitanie.img}` : null,
+      img: pitanie.img ? `/dist${pitanie.img}` : null,
     }));
     res.json(formattedPitanies);
   } catch (err) {
