@@ -1,4 +1,4 @@
-﻿doctype html
+doctype html
 html(lang="en")
   head
     title Просмотр продукта
@@ -6,6 +6,16 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/style.css')
     style
+      | .product-image-container {
+      |   display: flex;
+      |   justify-content: center;
+      |   margin-bottom: 20px;
+      | }
+      | .product-image {
+      |   max-width: 200px;
+      |   max-height: 200px;
+      |   border-radius: 8px;
+      | }
       | .btn-secondary {
       |   background: rgba(255, 255, 255, 0.1);
       |   color: white;
@@ -23,7 +33,7 @@ html(lang="en")
       |   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
       | }
       | .btn-primary {
-      |   background: linear-gradient(135deg, #ffc107, #e0a800); /* Желтый градиент */
+      |   background: linear-gradient(135deg, #ffc107, #e0a800);
       |   color: white;
       |   border: none;
       |   padding: 10px 20px;
@@ -37,7 +47,7 @@ html(lang="en")
       | .btn-primary:hover {
       |   transform: translateY(-3px);
       |   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-      |   background: linear-gradient(135deg, #e0a800, #b38800); /* Более темный градиент при наведении */
+      |   background: linear-gradient(135deg, #e0a800, #b38800);
       | }
       | .action-buttons {
       |   display: flex;
@@ -50,10 +60,11 @@ html(lang="en")
       h1.page-title Просмотр продукта
       div.container
         div.product-info
-          if product.img
-            img.product-image(src=product.img alt="Product Image")
-          else
-            | Нет изображения
+          .product-image-container
+            if product.img
+              img.product-image(src=product.img alt="Product Image")
+            else
+              | Нет изображения
           div.info-container
             p <strong>Название:</strong> #{product.name}
             p <strong>Вид:</strong> #{product.vid}
