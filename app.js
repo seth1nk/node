@@ -172,6 +172,22 @@ app.get('/api/view-pet/:id', async (req, res) => {
         res.status(500).json({ message: 'Error fetching pet', error: err.message });
     }
 });
+app.get('/api/view-pitanie/:id', async (req, res) => {
+  const productId = req.params.id;
+  if (!/^\d+$/.test(productId)) {
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+  try {
+    const product = await Pitanie.findByPk(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.json(product);
+  } catch (err) {
+    console.error('Ошибка при получении данных продукта:', err);
+    res.status(500).json({ message: 'Error fetching product', error: err.message });
+  }
+});
 app.get('/add-pet', (req, res) => {
   res.render('add-pet', { title: 'Добавить питомца' });
 });
