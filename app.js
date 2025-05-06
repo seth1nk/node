@@ -11,7 +11,7 @@ const authRequired = require('./middleware/authRequired');
 
 const app = express();
 
-const sequelize = new Sequelize('postgresql://uqhnsy0zoriffb7sednp:EzBtfkqYZhEDeJyh4bBNqCP1VhCdSC@bsgrmqwceckysck4ikkx-postgresql.services.clever-cloud.com:50013/bsgrmqwceckysck4ikkx', {
+const sequelize = new Sequelize('postgresql://uz28jfwl9er7qlvy7kg7:K5ZLDCYHSy5WBlUKMG0pV3JneE53Ve@b1nfwip6gxcxk3htfqvv-postgresql.services.clever-cloud.com:50013/b1nfwip6gxcxk3htfqvv', {
     dialect: 'postgres',
     logging: console.log,
     dialectOptions: {
